@@ -1,0 +1,241 @@
+Atividade 01:
+
+#include <stdio.h>
+
+int main() {
+    int vetorInicial[10];
+    int vetorPar[10];
+    int vetorImpar[10];
+    
+    printf("Digite 10 elementos inteiros:\n");
+    for (int i = 0; i < 10; i++) {
+        scanf("%d", &vetorInicial[i]);
+        if (vetorInicial[i] % 2 == 0) {
+            vetorPar[i] = vetorInicial[i];
+            vetorImpar[i] = 0; 
+        } else {
+            vetorPar[i] = 0; 
+            vetorImpar[i] = vetorInicial[i];
+        }
+    }
+    
+    printf("Vetor de números pares:\n");
+    for (int i = 0; i < 10; i++) {
+        if (vetorPar[i] != 0) {
+            printf("%d ", vetorPar[i]);
+        }
+    }
+    printf("\n");
+    
+    printf("Vetor de números ímpares:\n");
+    for (int i = 0; i < 10; i++) {
+        if (vetorImpar[i] != 0) {
+            printf("%d ", vetorImpar[i]);
+        }
+    }
+    printf("\n");
+    
+    return 0;
+}
+
+######################################
+
+Atividade 02:
+#include <stdio.h>
+
+void bubbleSort(int arr[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int vetor1[5];
+    int vetor2[5];
+    
+    printf("Vetor 1 (5 elementos):\n");
+    for (int i = 0; i < 5; i++) {
+        scanf("%d", &vetor1[i]);
+    }
+    
+    printf("Vetor 2 (5 elementos):\n");
+    for (int i = 0; i < 5; i++) {
+        scanf("%d", &vetor2[i]);
+    }
+    
+    bubbleSort(vetor1, 5);
+    bubbleSort(vetor2, 5);
+    
+    int vetorIntercalado[10];
+    int index1 = 0, index2 = 0;
+    
+    for (int i = 0; i < 10; i++) {
+        if (index1 < 5 && (index2 >= 5 || vetor1[index1] < vetor2[index2])) {
+            vetorIntercalado[i] = vetor1[index1];
+            index1++;
+        } else {
+            vetorIntercalado[i] = vetor2[index2];
+            index2++;
+        }
+    }
+    
+    printf("Vetor intercalado:\n");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", vetorIntercalado[i]);
+    }
+    printf("\n");
+    
+    return 0;
+}
+
+######################################
+
+Atvidade 03:
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int contains(int arr[], int size, int num) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == num) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int main() {
+    srand(time(0));
+    
+    int vetor1[20];
+    int vetor2[20];
+    int vetorIntersecao[20];
+    
+    for (int i = 0; i < 20; i++) {
+        vetor1[i] = rand() % 100; // Números aleatórios de 0 a 99
+        vetor2[i] = rand() % 100;
+    }
+    
+    int tamanhoIntersecao = 0;
+    for (int i = 0; i < 20; i++) {
+        if (contains(vetor1, 20, vetor2[i])) {
+            if (!contains(vetorIntersecao, tamanhoIntersecao, vetor2[i])) {
+                vetorIntersecao[tamanhoIntersecao] = vetor2[i];
+                tamanhoIntersecao++;
+            }
+        }
+    }
+    
+    printf("Vetor de interseção:\n");
+    for (int i = 0; i < tamanhoIntersecao; i++) {
+        printf("%d ", vetorIntersecao[i]);
+    }
+    printf("\n");
+    
+    return 0;
+}
+
+######################################
+
+Atvidade 04:
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    srand(time(0));
+    
+    int matriz[4][4];
+    
+    printf("Matriz 4x4:\n");
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            matriz[i][j] = rand() % 100; // Números aleatórios de 0 a 99
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+    
+    int maiorValor = matriz[0][0];
+    int menorValor = matriz[0][0];
+    int linhaMaior, colunaMaior, linhaMenor, colunaMenor;
+    
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            if (matriz[i][j] > maiorValor) {
+                maiorValor = matriz[i][j];
+                linhaMaior = i;
+                colunaMaior = j;
+            }
+            if (matriz[i][j] < menorValor) {
+                menorValor = matriz[i][j];
+                linhaMenor = i;
+                colunaMenor = j;
+            }
+        }
+    }
+    
+    printf("Maior valor: %d (linha %d, coluna %d)\n", maiorValor, linhaMaior, colunaMaior);
+    printf("Menor valor: %d (linha %d, coluna %d)\n", menorValor, linhaMenor, colunaMenor);
+    
+    return 0;
+}
+
+######################################
+
+Atividade 05:
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    srand(time(0));
+    
+    int matriz[5][3];
+    
+    printf("Matriz 5x3 (pontuação de 5 atletas em 3 aparelhos):\n");
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 3; j++) {
+            matriz[i][j] = rand() % 11; // Números aleatórios de 0 a 10
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+    
+    printf("Atletas com maior pontuação em cada aparelho:\n");
+    for (int j = 0; j < 3; j++) {
+        int maiorPontuacao = -1;
+        int indiceAtleta = -1;
+        
+        for (int i = 0; i < 5; i++) {
+            if (matriz[i][j] > maiorPontuacao) {
+                maiorPontuacao = matriz[i][j];
+                indiceAtleta = i;
+            }
+        }
+        
+        printf("Aparelho %d: Atleta %d (Pontuação: %d)\n", j + 1, indiceAtleta + 1, maiorPontuacao);
+    }
+    
+    printf("Menor pontuação de cada atleta nos 3 aparelhos:\n");
+    for (int i = 0; i < 5; i++) {
+        int menorPontuacao = 11;
+        
+        for (int j = 0; j < 3; j++) {
+            if (matriz[i][j] < menorPontuacao) {
+                menorPontuacao = matriz[i][j];
+            }
+        }
+        
+        printf("Atleta %d: Menor Pontuação: %d\n", i + 1, menorPontuacao);
+    }
+    
+    return 0;
+}
+
